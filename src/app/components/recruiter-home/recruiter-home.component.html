@@ -1,0 +1,782 @@
+<div class="recruiter-home">
+  <!-- Top Navigation Bar -->
+      <nav class="top-nav">
+        <div class="nav-content">
+          <div class="nav-left">
+            <h1 class="nav-title" (click)="setActiveTab('home')" style="cursor: pointer;">BHARATHKUMAR BANDI</h1>
+            <div class="nav-menu">
+              <a class="nav-link" [class.active]="activeTab === 'home'" (click)="setActiveTab('home')">Home</a>
+              <a class="nav-link" [class.active]="activeTab === 'professional'" (click)="setActiveTab('professional')">Professional</a>
+              <a class="nav-link" [class.active]="activeTab === 'skills'" (click)="setActiveTab('skills')">Skills</a>
+              <a class="nav-link" [class.active]="isEducationActive()" (click)="setActiveTab('education')">Education</a>
+              <a class="nav-link" [class.active]="activeTab === 'projects'" (click)="setActiveTab('projects')">Projects</a>
+              <a class="nav-link" [class.active]="activeTab === 'hire'" (click)="setActiveTab('hire')">Hire Me</a>
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="back-icon" (click)="goToProfileSelection()">
+              ←
+            </div>
+          </div>
+        </div>
+      </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section about-section" *ngIf="activeTab === 'home'">
+    <!-- Subtle Background Elements -->
+    <div class="geometric-pattern"></div>
+    <div class="tech-accent"></div>
+    
+    <div class="hero-content">
+      <div class="hero-profile-section">
+        <div class="profile-picture">
+          <div class="profile-placeholder">
+            <img src="assets/images/Hero-Profile-Pic.jpeg" alt="Bharathkumar Bandi Profile Picture" class="profile-image">
+          </div>
+        </div>
+        <div class="hero-text-content">
+          <h1 class="hero-title">Bharathkumar Bandi</h1>
+          <p class="hero-subtitle">Graduate Student in Computer Science</p>
+          <p class="hero-university">
+            <img src="assets\images\UM_FLINT LOGO.png" alt="UM-Flint Logo" class="university-icon">
+            University of Michigan-Flint
+          </p>
+      <p class="hero-description">
+        Dynamic and results-driven Full-Stack & AI Engineer with 5+ years in full-stack development across high-impact, large-scale applications. I bring expertise in C#, .NET Core, Angular, React, Node.js, Azure, Kubernetes, and Docker, with a passion for optimizing systems to scale. I've led initiatives serving 1000+ students and managing 25M+ documents, driving feature integrations like chat, video consultations, and API development. My key achievement was implementing robust security measures across multiple products, including XSS protection in both frontend and backend, advanced password policies, and stringent authentication protocols. Additionally, I transformed legacy systems into high-speed microservices architecture, reducing processing time from minutes to seconds and delivering real-time insights for users.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" (click)="openResumeModal()">
+          <span class="btn-icon">▶</span>
+          Resume
+        </button>
+        <button class="btn btn-secondary" (click)="openLinkedIn()">
+          <span class="btn-icon linkedin-icon">in</span>
+          LinkedIn
+        </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Sections -->
+  <div class="content-container">
+    <!-- Home Tab Content -->
+    <div *ngIf="activeTab === 'home'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Today's Top Picks for Recruiter</h2>
+        <div class="cards-scroll">
+          <div class="netflix-card" *ngFor="let card of topPicksCards" (click)="setActiveTab(card.tab, card.title)">
+            <div class="card-content">
+              <h3>{{card.title}}</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="row">
+        <h2 class="row-title">Continue Watching for Recruiter</h2>
+        <div class="cards-grid">
+          <div class="netflix-card" *ngFor="let card of continueWatchingCards" (click)="setActiveTab(card.tab, card.title)">
+            <div class="card-content">
+              <h3>{{card.title}}</h3>
+            </div>
+          </div>
+          <div class="netflix-card" *ngIf="continueWatchingCards.length === 0" (click)="setActiveTab('skills', 'AI Agents Automation')">
+            <div class="card-content">
+              <h3>AI Agents Automation</h3>
+            </div>
+          </div>
+          <div class="netflix-card" *ngIf="continueWatchingCards.length === 0" (click)="setActiveTab('education', 'Cover letter')">
+            <div class="card-content">
+              <h3>Cover letter</h3>
+            </div>
+          </div>
+          <div class="netflix-card" *ngIf="continueWatchingCards.length === 0" (click)="setActiveTab('projects', 'Certificates')">
+            <div class="card-content">
+              <h3>Certificates</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Professional Tab Content -->
+    <div *ngIf="activeTab === 'professional'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Work Experience Timeline</h2>
+        <div class="timeline-container">
+          <div class="experience-card featured" data-duration="Jun 2024 – Present">
+            <div class="card-header">
+              <h3>Graduate Student Ambassador</h3>
+              <div class="company">University of Michigan-Flint</div>
+              <div class="technologies">Flint, MI</div>
+            </div>
+            <div class="card-content">
+              <ul class="achievements">
+                <li>Guided and assisted 1,000 – 1,500 students with programming, lab work, and course-related problem solving through mentoring and workshops</li>
+                <li>Provided training on AI, automation, and full-stack technologies, helping peers strengthen technical and career skills</li>
+                <li>Built and optimized academic workflows using n8n automation, LangChain AI agents, and LLM-based orchestration</li>
+                <li>Conducted research and experiments with Generative AI, transformers, RAG pipelines, and vector databases to support AI-driven learning environments</li>
+                <li>Developed internal academic dashboards and applications using .NET 8, Angular, MySQL, and Azure, improving event tracking and management</li>
+                <li>Advocated for AI safety practices, including prompt-injection defense and output validation across student projects</li>
+                <li>Collaborated with faculty to incorporate GenAI and automation tools into university learning materials and assignments</li>
+                <li>Continuously exploring AI agents, workflow automation, and real-time applications to connect academic research with industry practice</li>
+              </ul>
+              <div class="experience-actions">
+                <button class="btn btn-primary" (click)="visitUniversityProgram()">
+                  Learn About My Program
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="experience-card" data-duration="Aug 2021 – Feb 2024">
+            <div class="card-header"> 
+              <h3>Full-Stack Software Engineer</h3>
+              <div class="company">First American (India) Pvt Ltd</div>
+              <div class="technologies">Hyderabad, India</div>
+            </div>
+            <div class="card-content">
+              <ul class="achievements">
+                <li>Engineered large-scale enterprise features for Covenant Guard, serving 50,000+ daily users and managing 25+ million documents across Azure services</li>
+                <li>Built robust .NET Core 6/7/8 microservices and optimized SQL queries, indexes, and stored procedures for better scalability and reliability</li>
+                <li>Developed responsive UIs with Angular 14+, React 18, TypeScript, and RxJS, improving front-end performance by 25%</li>
+                <li>Automated deployments with Docker, Kubernetes (AKS), and CI/CD pipelines in Azure DevOps, using Terraform (IaC) for infrastructure consistency</li>
+                <li>Integrated JWT/OAuth2, Azure AD, and RBAC for secure, multi-level access management</li>
+                <li>Created LangChain and n8n-based automation agents to streamline internal workflows, CI/CD validation, and data reporting</li>
+                <li>Designed RAG pipelines using FAISS/Pinecone vector databases for AI-powered document retrieval and semantic search</li>
+                <li>Implemented LLM capabilities like function calling and structured outputs to enable data-driven dashboards and automation</li>
+                <li>Mentored junior developers in debugging, distributed systems, and full-stack project architecture</li>
+                <li>Enhanced system performance and monitoring through OpenTelemetry, Grafana, and Prometheus dashboards</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="experience-card" data-duration="Aug 2021 – Dec 2023">
+            <div class="card-header">
+              <h3>Member Technical Staff (Intern)</h3>
+              <div class="company">First American (India) Pvt Ltd</div>
+              <div class="technologies">Hyderabad, India</div>
+            </div>
+            <div class="card-content">
+              <ul class="achievements">
+                <li>Contributed to enterprise web applications using .NET Core, Angular 12+, React 17, and SQL Server in an Agile environment</li>
+                <li>Developed and tested RESTful and FAST APIs using xUnit, NUnit, and Jest, maintaining high code quality and test coverage</li>
+                <li>Automated reporting through SQL triggers, stored procedures, and views, improving workflow efficiency</li>
+                <li>Integrated Blackboard LMS APIs to automate grade synchronization and content management</li>
+                <li>Enhanced UI responsiveness and accessibility following WCAG 2.1 and user-centered design principles</li>
+                <li>Assisted in maintaining CI/CD pipelines using Azure DevOps YAML, ensuring stable releases and automated deployments</li>
+                <li>Explored AI and LLM concepts independently, applying them to personal web development projects to understand real-world integration patterns</li>
+                <li>Participated in Agile sprints, debugging sessions, and code reviews, strengthening collaboration and software engineering fundamentals</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Skills Tab Content -->
+    <div *ngIf="activeTab === 'skills'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Technologies & Frameworks</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon csharp">
+              <i class="devicon-csharp-plain"></i>
+            </div>
+            <div class="skill-name">C#</div>
+            <div class="skill-description">Backend Language</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon dotnet">
+              <i class="devicon-dotnetcore-plain"></i>
+            </div>
+            <div class="skill-name">.NET Core</div>
+            <div class="skill-description">Backend Framework</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon angular">
+              <i class="devicon-angularjs-plain"></i>
+            </div>
+            <div class="skill-name">Angular</div>
+            <div class="skill-description">Frontend Framework</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon react">
+              <i class="devicon-react-original"></i>
+            </div>
+            <div class="skill-name">React</div>
+            <div class="skill-description">Frontend Library</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon typescript">
+              <i class="devicon-typescript-plain"></i>
+            </div>
+            <div class="skill-name">TypeScript</div>
+            <div class="skill-description">Programming Language</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon api">
+              <i class="devicon-nodejs-plain"></i>
+            </div>
+            <div class="skill-name">REST APIs</div>
+            <div class="skill-description">API Development</div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="row">
+        <h2 class="row-title">AI & LLMs</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon langchain">
+              <i class="devicon-python-plain"></i>
+            </div>
+            <div class="skill-name">LangChain</div>
+            <div class="skill-description">AI Framework</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon rag">
+              <i class="devicon-tensorflow-original"></i>
+            </div>
+            <div class="skill-name">RAG Pipelines</div>
+            <div class="skill-description">AI Architecture</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon vector">
+              <i class="devicon-mongodb-plain"></i>
+            </div>
+            <div class="skill-name">Vector DBs</div>
+            <div class="skill-description">FAISS/Pinecone</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon ai">
+              <i class="devicon-kubernetes-plain"></i>
+            </div>
+            <div class="skill-name">AI Agents</div>
+            <div class="skill-description">Tool Orchestration</div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="row">
+        <h2 class="row-title">Cloud & DevOps</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon azure">
+              <i class="devicon-azure-plain"></i>
+            </div>
+            <div class="skill-name">Azure</div>
+            <div class="skill-description">Cloud Platform</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon kubernetes">
+              <i class="devicon-kubernetes-plain"></i>
+            </div>
+            <div class="skill-name">Kubernetes</div>
+            <div class="skill-description">Container Orchestration</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon docker">
+              <i class="devicon-docker-plain"></i>
+            </div>
+            <div class="skill-name">Docker</div>
+            <div class="skill-description">Containerization</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon terraform">
+              <i class="devicon-terraform-plain"></i>
+            </div>
+            <div class="skill-name">Terraform</div>
+            <div class="skill-description">Infrastructure as Code</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon github">
+              <i class="devicon-github-original"></i>
+            </div>
+            <div class="skill-name">GitHub Actions</div>
+            <div class="skill-description">CI/CD Pipeline</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon azure-devops">
+              <i class="devicon-visualstudio-plain"></i>
+            </div>
+            <div class="skill-name">Azure DevOps</div>
+            <div class="skill-description">DevOps Platform</div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="row">
+        <h2 class="row-title">Databases</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon sql-server">
+              <i class="devicon-microsoftsqlserver-plain"></i>
+            </div>
+            <div class="skill-name">SQL Server</div>
+            <div class="skill-description">Relational Database</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon postgresql">
+              <i class="devicon-postgresql-plain"></i>
+            </div>
+            <div class="skill-name">PostgreSQL</div>
+            <div class="skill-description">Open Source Database</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon redis">
+              <i class="devicon-redis-plain"></i>
+            </div>
+            <div class="skill-name">Redis</div>
+            <div class="skill-description">In-Memory Database</div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="row">
+        <h2 class="row-title">Security & Observability</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon oauth">
+              🔑
+            </div>
+            <div class="skill-name">OAuth2</div>
+            <div class="skill-description">Authentication Protocol</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon jwt">
+              🎫
+            </div>
+            <div class="skill-name">JWT</div>
+            <div class="skill-description">Token Authentication</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon opentelemetry">
+              <i class="devicon-kubernetes-plain"></i>
+            </div>
+            <div class="skill-name">OpenTelemetry</div>
+            <div class="skill-description">Observability Framework</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon grafana">
+              <i class="devicon-grafana-original"></i>
+            </div>
+            <div class="skill-name">Grafana</div>
+            <div class="skill-description">Monitoring Dashboard</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon prometheus">
+              <i class="devicon-prometheus-original"></i>
+            </div>
+            <div class="skill-name">Prometheus</div>
+            <div class="skill-description">Metrics Collection</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+        <!-- Education Tab Content -->
+        <div *ngIf="activeTab === 'education'" class="tab-content">
+          <section class="row">
+            <h2 class="row-title">Education & Certifications</h2>
+            <div class="cards-grid">
+              <div class="netflix-card" (click)="showCollegeDetails('umich')">
+                <div class="card-content">
+                  <h3>University of Michigan-Flint</h3>
+                </div>
+              </div>
+              <div class="netflix-card" (click)="showCollegeDetails('vignan')">
+                <div class="card-content">
+                  <h3>Vignan Institute of Technology & Sciences</h3>
+                </div>
+              </div>
+              <div class="netflix-card" (click)="setActiveTab('certificates', 'Certifications')">
+                <div class="card-content">
+                  <h3>Certifications</h3>
+                </div>
+              </div>
+              <div class="netflix-card" (click)="setActiveTab('academic-projects', 'Academic Projects')">
+                <div class="card-content">
+                  <h3>Academic Projects</h3>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- College Details Modal -->
+          <div *ngIf="selectedCollege" class="college-modal" (click)="closeCollegeDetails()">
+            <div class="college-modal-content" (click)="$event.stopPropagation()">
+              <div class="college-hero" [class.umich-bg]="selectedCollege === 'umich'" [class.vignan-bg]="selectedCollege === 'vignan'">
+                <div class="college-info">
+                  <h2 *ngIf="selectedCollege === 'umich'">University of Michigan-Flint</h2>
+                  <h2 *ngIf="selectedCollege === 'vignan'">Vignan Institute of Technology & Sciences</h2>
+                  <p *ngIf="selectedCollege === 'umich'">Flint, Michigan, USA</p>
+                  <p *ngIf="selectedCollege === 'vignan'">Deshmukhi, Hyderabad, Telangana, India</p>
+                </div>
+              </div>
+              <div class="college-details">
+                <div *ngIf="selectedCollege === 'umich'" class="college-text">
+                  <h3>My Experience at University of Michigan-Flint</h3>
+                  <p>Currently pursuing my graduate studies at University of Michigan-Flint, where I serve as a Graduate Student Ambassador. This prestigious institution has provided me with advanced knowledge in AI, machine learning, and full-stack development.</p>
+                  <p>As a Graduate Student Ambassador, I mentor over 1000+ students on AI, programming, and web development. I've built academic dashboards using .NET 8 and MySQL, and led workshops on full-stack development and AI integration.</p>
+                  <p>The university's cutting-edge curriculum and research opportunities have enhanced my expertise in emerging technologies and prepared me for leadership roles in the tech industry.</p>
+                  <div class="college-actions">
+                    <button class="btn btn-primary" (click)="visitUniversity('umich')">
+                      Visit the page for more information
+                    </button>
+                  </div>
+                </div>
+                <div *ngIf="selectedCollege === 'vignan'" class="college-text">
+                  <h3>My Experience at Vignan Institute of Technology & Sciences</h3>
+                  <p>Vignan Institute of Technology & Sciences in Deshmukhi, Hyderabad, provided me with a strong foundation in computer science and engineering. This esteemed institution in Telangana, India, shaped my early technical skills and passion for technology.</p>
+                  <p>During my time at Vignan, I developed fundamental programming skills, learned software engineering principles, and gained hands-on experience with various technologies. The institute's rigorous curriculum and practical approach to education laid the groundwork for my successful career in software development.</p>
+                  <p>The collaborative learning environment and experienced faculty at Vignan helped me understand the importance of continuous learning and innovation in the rapidly evolving field of technology.</p>
+                  <div class="college-actions">
+                    <button class="btn btn-primary" (click)="visitUniversity('vignan')">
+                      Visit the page for more information
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <!-- Projects Tab Content -->
+    <div *ngIf="activeTab === 'projects'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Project Portfolio</h2>
+        <div class="cards-grid">
+          <div class="netflix-card">
+            <div class="card-content">
+              <h3>Web Applications</h3>
+            </div>
+          </div>
+          <div class="netflix-card">
+            <div class="card-content">
+              <h3>AI Projects</h3>
+            </div>
+          </div>
+          <div class="netflix-card">
+            <div class="card-content">
+              <h3>Mobile Apps</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Certificates Tab Content -->
+    <div *ngIf="activeTab === 'certificates'" class="tab-content">
+      <section class="row">
+        <div class="page-header">
+          <h2 class="row-title">Professional Certifications</h2>
+          <button class="back-arrow" (click)="goBackToEducation()" title="Back to Education">
+            ←
+          </button>
+        </div>
+        <div class="certificates-carousel-container">
+          <button class="carousel-arrow left-arrow" (click)="previousCertificate()" [disabled]="currentCertificateIndex === 0">
+            ‹
+          </button>
+          <div class="certificates-carousel">
+            <div class="certificates-track" [style.transform]="getCertificateTransform()">
+              <!-- Previous Certificate -->
+              <div class="certificate-card prev" 
+                   *ngIf="currentCertificateIndex > 0"
+                   [class]="'certificate-card prev'">
+                <div class="certificate-image">
+                  <img [src]="certificates[currentCertificateIndex - 1].image" [alt]="certificates[currentCertificateIndex - 1].title" />
+                </div>
+                <div class="certificate-info">
+                  <h3>{{certificates[currentCertificateIndex - 1].title}}</h3>
+                  <p class="description">{{certificates[currentCertificateIndex - 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag" *ngFor="let tech of certificates[currentCertificateIndex - 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="certificate-meta">
+                    <span class="issuer">{{certificates[currentCertificateIndex - 1].issuer}}</span>
+                    <span class="date">{{certificates[currentCertificateIndex - 1].date}}</span>
+                    <span class="category">{{certificates[currentCertificateIndex - 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Current Certificate -->
+              <div class="certificate-card active">
+                <div class="certificate-image">
+                  <img [src]="certificates[currentCertificateIndex].image" [alt]="certificates[currentCertificateIndex].title" />
+                </div>
+                <div class="certificate-info">
+                  <h3>{{certificates[currentCertificateIndex].title}}</h3>
+                  <p class="description">{{certificates[currentCertificateIndex].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag" *ngFor="let tech of certificates[currentCertificateIndex].technologies">{{tech}}</span>
+                  </div>
+                  <div class="certificate-meta">
+                    <span class="issuer">{{certificates[currentCertificateIndex].issuer}}</span>
+                    <span class="date">{{certificates[currentCertificateIndex].date}}</span>
+                    <span class="category">{{certificates[currentCertificateIndex].category}}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Next Certificate -->
+              <div class="certificate-card next" 
+                   *ngIf="currentCertificateIndex < certificates.length - 1"
+                   [class]="'certificate-card next'">
+                <div class="certificate-image">
+                  <img [src]="certificates[currentCertificateIndex + 1].image" [alt]="certificates[currentCertificateIndex + 1].title" />
+                </div>
+                <div class="certificate-info">
+                  <h3>{{certificates[currentCertificateIndex + 1].title}}</h3>
+                  <p class="description">{{certificates[currentCertificateIndex + 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag" *ngFor="let tech of certificates[currentCertificateIndex + 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="certificate-meta">
+                    <span class="issuer">{{certificates[currentCertificateIndex + 1].issuer}}</span>
+                    <span class="date">{{certificates[currentCertificateIndex + 1].date}}</span>
+                    <span class="category">{{certificates[currentCertificateIndex + 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-arrow right-arrow" (click)="nextCertificate()" [disabled]="currentCertificateIndex === certificates.length - 1">
+            ›
+          </button>
+        </div>
+        <div class="certificate-indicators">
+          <span *ngFor="let certificate of certificates; let i = index" 
+                class="indicator" 
+                [class.active]="i === currentCertificateIndex"
+                (click)="goToCertificate(i)">
+          </span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Academic Projects Tab Content -->
+    <div *ngIf="activeTab === 'academic-projects'" class="tab-content">
+      <section class="row">
+        <div class="page-header">
+          <h2 class="row-title">Academic Projects Portfolio</h2>
+          <button class="back-arrow" (click)="goBackToEducation()" title="Back to Education">
+            ←
+          </button>
+        </div>
+        <div class="projects-carousel-container">
+          <button class="carousel-arrow left-arrow" (click)="previousProject()" [disabled]="currentProjectIndex === 0">
+            ‹
+          </button>
+          <div class="projects-carousel">
+            <div class="projects-track" [style.transform]="getProjectTransform()">
+              <!-- Previous Project -->
+              <div class="project-card prev" 
+                   *ngIf="currentProjectIndex > 0"
+                   [class]="'project-card prev'">
+                <div class="project-image">
+                  <img [src]="academicProjects[currentProjectIndex - 1].image" [alt]="academicProjects[currentProjectIndex - 1].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{academicProjects[currentProjectIndex - 1].title}}</h3>
+                  <p class="description">{{academicProjects[currentProjectIndex - 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag" *ngFor="let tech of academicProjects[currentProjectIndex - 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{academicProjects[currentProjectIndex - 1].year}}</span>
+                    <span class="category">{{academicProjects[currentProjectIndex - 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Current Project -->
+              <div class="project-card active">
+                <div class="project-image">
+                  <img [src]="academicProjects[currentProjectIndex].image" [alt]="academicProjects[currentProjectIndex].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{academicProjects[currentProjectIndex].title}}</h3>
+                  <p class="description">{{academicProjects[currentProjectIndex].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag" *ngFor="let tech of academicProjects[currentProjectIndex].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{academicProjects[currentProjectIndex].year}}</span>
+                    <span class="category">{{academicProjects[currentProjectIndex].category}}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Next Project -->
+              <div class="project-card next" 
+                   *ngIf="currentProjectIndex < academicProjects.length - 1"
+                   [class]="'project-card next'">
+                <div class="project-image">
+                  <img [src]="academicProjects[currentProjectIndex + 1].image" [alt]="academicProjects[currentProjectIndex + 1].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{academicProjects[currentProjectIndex + 1].title}}</h3>
+                  <p class="description">{{academicProjects[currentProjectIndex + 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag" *ngFor="let tech of academicProjects[currentProjectIndex + 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{academicProjects[currentProjectIndex + 1].year}}</span>
+                    <span class="category">{{academicProjects[currentProjectIndex + 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-arrow right-arrow" (click)="nextProject()" [disabled]="currentProjectIndex === academicProjects.length - 1">
+            ›
+          </button>
+        </div>
+        <div class="project-indicators">
+          <span *ngFor="let project of academicProjects; let i = index" 
+                class="indicator" 
+                [class.active]="i === currentProjectIndex"
+                (click)="goToProject(i)">
+          </span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Hire Me Tab Content -->
+    <div *ngIf="activeTab === 'hire'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Get In Touch</h2>
+        <div class="cards-grid">
+          <div class="netflix-card" (click)="showContactDetails()">
+            <div class="card-content">
+              <h3>Contact Info</h3>
+            </div>
+          </div>
+          <div class="netflix-card" (click)="openResumeModal()">
+            <div class="card-content">
+              <h3>Resume</h3>
+            </div>
+          </div>
+          <div class="netflix-card" (click)="openLinkedIn()">
+            <div class="card-content">
+              <h3>LinkedIn</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Details Modal -->
+      <div *ngIf="showContactModal" class="contact-modal" (click)="closeContactModal()">
+        <div class="contact-modal-content" (click)="$event.stopPropagation()">
+          <div class="contact-header">
+            <h2>Contact Information</h2>
+            <button class="close-btn" (click)="closeContactModal()">×</button>
+          </div>
+          
+          <div class="contact-layout">
+            <!-- Left Side - Contact Details -->
+            <div class="contact-details-section">
+              <h3>Get In Touch</h3>
+              <div class="contact-details">
+                <div class="contact-item">
+                  <i class="icon email-icon">✉</i>
+                  <div>
+                    <h4>Email</h4>
+                    <p>bharathkumarbandi500&#64;gmail.com</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="icon phone-icon">📞</i>
+                  <div>
+                    <h4>Phone</h4>
+                    <p>+1 810-293-1752</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="icon pin-icon">📍</i>
+                  <div>
+                    <h4>Address</h4>
+                    <p>37041 Jefferson Ct, Unit-613, Farmington Hills, Michigan, United States, 48335</p>
+                  </div>
+                </div>
+                <div class="contact-item linkedin-item" (click)="openLinkedIn()">
+                  <i class="icon linkedin-icon">in</i>
+                  <div>
+                    <h4>LinkedIn</h4>
+                    <p>linkedin.com/in/bharathkumar-bandi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Side - Message Form -->
+            <div class="message-form-section">
+              <h3>Send me a message</h3>
+              <form (ngSubmit)="sendMessage()" #messageForm="ngForm">
+                <div class="form-group">
+                  <label for="name">Your Name *</label>
+                  <input type="text" id="name" name="name" [(ngModel)]="messageData.name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Your Email *</label>
+                  <input type="email" id="email" name="email" [(ngModel)]="messageData.email" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Your Phone (Optional)</label>
+                  <input type="tel" id="phone" name="phone" [(ngModel)]="messageData.phone">
+                </div>
+                <div class="form-group">
+                  <label for="message">Message *</label>
+                  <textarea id="message" name="message" [(ngModel)]="messageData.message" rows="4" required></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="sendMessage()" [disabled]="!messageForm.valid">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Message Success Modal -->
+      <div *ngIf="showMessageSuccessModal" class="confirmation-modal" (click)="closeMessageSuccess()">
+        <div class="message-success-modal-content" (click)="$event.stopPropagation()">
+          <div class="message-success-header">
+            <h2>Thank You, {{lastSubmittedName}} &#33;</h2>
+          </div>
+          <div class="message-success-body">
+            <div class="message-content">
+              <p>Thank you for your interest,</p>
+              <p>For immediate contact, please reach out to me directly:</p>
+            </div>
+            <div class="contact-info">
+              <div class="contact-item">
+                <span class="contact-icon">📱</span>
+                <span class="contact-text">+1 810-293-1752</span>
+              
+                <span class="contact-icon">📧</span>
+                <span class="contact-text">bharathkumarbandi500&#64;gmail.com</span>
+              </div>
+            </div>
+            <div class="message-footer">
+              <p>I'll get back to you as soon as possible!</p>
+              <p><strong>Bharath Kumar Bandi</strong></p>
+            </div>
+            <div class="confirmation-actions">
+              <button class="btn btn-primary" (click)="closeMessageSuccess()">GOT IT!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

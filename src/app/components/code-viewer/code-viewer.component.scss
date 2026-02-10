@@ -1,0 +1,267 @@
+.code-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--netflix-dark-gray);
+}
+
+.code-header {
+  background: #2d2d2d;
+  border-bottom: 1px solid var(--netflix-gray);
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.code-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--netflix-white);
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.code-content-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 300px;
+  background: #1e1e1e;
+  border-right: 1px solid var(--netflix-gray);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.file-list {
+  padding: 20px;
+}
+
+.file-list-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--netflix-white);
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--netflix-gray);
+}
+
+.file-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: var(--netflix-light-gray);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.file-item:hover {
+  background: var(--netflix-gray);
+  color: var(--netflix-white);
+}
+
+.file-item.active {
+  background: var(--netflix-red);
+  color: var(--netflix-white);
+}
+
+.file-icon {
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.file-name {
+  font-weight: 500;
+}
+
+.code-content {
+  flex: 1;
+  background: #1e1e1e;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--netflix-light-gray);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--netflix-gray);
+  border-top: 3px solid var(--netflix-red);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.code-display {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-header {
+  background: #2d2d2d;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--netflix-gray);
+}
+
+.file-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--netflix-white);
+  margin: 0 0 5px 0;
+}
+
+.file-path {
+  font-size: 0.8rem;
+  color: var(--netflix-light-gray);
+}
+
+.code-body {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+  background: #1e1e1e;
+}
+
+.code-body pre {
+  margin: 0;
+  font-family: 'Fira Code', 'Monaco', 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #d4d4d4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.code-body code {
+  display: block;
+  width: 100%;
+}
+
+.no-file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--netflix-light-gray);
+  text-align: center;
+}
+
+.no-file h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: var(--netflix-white);
+}
+
+.no-file p {
+  font-size: 1rem;
+}
+
+/* Syntax highlighting */
+.keyword {
+  color: #569cd6;
+}
+
+.string {
+  color: #ce9178;
+}
+
+.comment {
+  color: #6a9955;
+}
+
+.number {
+  color: #b5cea8;
+}
+
+.function {
+  color: #dcdcaa;
+}
+
+.type {
+  color: #4ec9b0;
+}
+
+.operator {
+  color: #d4d4d4;
+}
+
+.punctuation {
+  color: #d4d4d4;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .code-content-wrapper {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid var(--netflix-gray);
+  }
+  
+  .file-items {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+  }
+  
+  .file-item {
+    white-space: nowrap;
+    min-width: fit-content;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
