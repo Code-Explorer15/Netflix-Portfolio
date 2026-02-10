@@ -207,4 +207,4 @@ This project is for portfolio purposes. All rights reserved.
 
 ---
 
-Built with ❤️ by Bharath Kumar Bandi using Angular and .NET 8
+Built By Bharath Kumar Bandi using Angular and .NET 8
