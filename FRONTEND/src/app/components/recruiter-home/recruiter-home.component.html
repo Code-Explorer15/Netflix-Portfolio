@@ -1,0 +1,820 @@
+<div class="recruiter-home">
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav" [class.nav-mobile-open]="mobileNavOpen">
+    <div class="nav-content">
+      <div class="nav-left">
+        <div class="nav-title-row">
+          <h1 class="nav-title" (click)="setActiveTab('home')" style="cursor: pointer;">BHARATHKUMAR BANDI</h1>
+          <button type="button" class="nav-menu-toggle" (click)="toggleMobileNav()" [attr.aria-expanded]="mobileNavOpen"
+            aria-controls="primary-navigation" aria-label="Toggle navigation menu">
+            <span class="nav-menu-toggle-bar"></span>
+            <span class="nav-menu-toggle-bar"></span>
+            <span class="nav-menu-toggle-bar"></span>
+          </button>
+        </div>
+        <div id="primary-navigation" class="nav-menu" [class.nav-menu--open]="mobileNavOpen">
+          <a class="nav-link" [class.active]="activeTab === 'home'" (click)="setActiveTab('home')">Home</a>
+          <a class="nav-link" [class.active]="activeTab === 'professional'"
+            (click)="setActiveTab('professional')">Professional</a>
+          <a class="nav-link" [class.active]="activeTab === 'skills'" (click)="setActiveTab('skills')">Skills</a>
+          <a class="nav-link" [class.active]="isEducationActive()" (click)="setActiveTab('education')">Education</a>
+          <a class="nav-link" [class.active]="activeTab === 'projects'" (click)="setActiveTab('projects')">Projects</a>
+          <a class="nav-link" [class.active]="activeTab === 'hire'" (click)="setActiveTab('hire')">Hire Me</a>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="back-icon" (click)="goToProfileSelection()">
+          ←
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section about-section" *ngIf="activeTab === 'home'">
+    <!-- Subtle Background Elements -->
+    <div class="geometric-pattern"></div>
+    <div class="tech-accent"></div>
+
+    <div class="hero-content">
+      <div class="hero-profile-section">
+        <div class="profile-picture">
+          <div class="profile-placeholder">
+            <img src="assets/images/Hero-Profile-Pic.jpeg" alt="Bharathkumar Bandi Profile Picture"
+              class="profile-image">
+          </div>
+        </div>
+        <div class="hero-text-content">
+          <h1 class="hero-title">Bharathkumar Bandi</h1>
+          <p class="hero-subtitle">Graduate Student in Computer Science</p>
+          <p class="hero-university">
+            <img src="assets\images\UM_FLINT LOGO.png" alt="UM-Flint Logo" class="university-icon">
+            University of Michigan-Flint
+          </p>
+          <p class="hero-description">
+            Dynamic and results-driven Full-Stack & AI Engineer with 5+ years in full-stack development across
+            high-impact, large-scale applications. I bring expertise in C#, .NET Core, Angular, React, Node.js, Azure,
+            Kubernetes, and Docker, with a passion for optimizing systems to scale. I've led initiatives serving 1000+
+            students and managing 25M+ documents, driving feature integrations like chat, video consultations, and API
+            development. My key achievement was implementing robust security measures across multiple products,
+            including XSS protection in both frontend and backend, advanced password policies, and stringent
+            authentication protocols. Additionally, I transformed legacy systems into high-speed microservices
+            architecture, reducing processing time from minutes to seconds and delivering real-time insights for users.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" (click)="openResumeModal()">
+              <span class="btn-icon">▶</span>
+              Resume
+            </button>
+            <button class="btn btn-secondary" (click)="openLinkedIn()">
+              <span class="btn-icon linkedin-icon">in</span>
+              LinkedIn
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Sections -->
+  <div class="content-container">
+    <!-- Home Tab Content -->
+    <div *ngIf="activeTab === 'home'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Today's Top Picks for Recruiter</h2>
+        <div class="cards-scroll">
+          <div class="netflix-card" *ngFor="let card of topPicksCards" (click)="setActiveTab(card.tab, card.title)">
+            <div class="card-content">
+              <h3>{{card.title}}</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2 class="row-title">Continue Watching for Recruiter</h2>
+        <div class="cards-grid">
+          <div class="netflix-card" *ngFor="let card of continueWatchingCards"
+            (click)="setActiveTab(card.tab, card.title)">
+            <div class="card-content">
+              <h3>{{card.title}}</h3>
+            </div>
+          </div>
+          <div class="netflix-card" *ngIf="continueWatchingCards.length === 0"
+            (click)="setActiveTab('skills', 'AI Agents Automation')">
+            <div class="card-content">
+              <h3>AI Agents Automation</h3>
+            </div>
+          </div>
+          <div class="netflix-card" *ngIf="continueWatchingCards.length === 0"
+            (click)="setActiveTab('education', 'Cover letter')">
+            <div class="card-content">
+              <h3>Cover letter</h3>
+            </div>
+          </div>
+          <div class="netflix-card" *ngIf="continueWatchingCards.length === 0"
+            (click)="setActiveTab('projects', 'Certificates')">
+            <div class="card-content">
+              <h3>Certificates</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Professional Tab Content -->
+    <div *ngIf="activeTab === 'professional'" class="tab-content">
+      <section class="row">
+        <!-- Professional roadmap (vertical: latest → past) -->
+        <div class="journey-section">
+          <h2 class="section-title">Professional Journey</h2>
+          <p class="roadmap-scroll-hint"></p>
+          <div class="professional-avatar-block">
+            <div class="robot-avatar-scene" [class.robot-explode-active]="robotExploding">
+              <div class="robot-blast-flash" *ngIf="robotExploding" aria-hidden="true"></div>
+              <div class="robot-blast-sparks" *ngIf="robotExploding" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="robot-avatar-figure" (dblclick)="onRobotDoubleClickHire()"
+                title="Double-click to open Hire Me">
+                <div class="robot-antenna">
+                  <span class="robot-antenna-rod"></span>
+                  <span class="robot-antenna-housing"></span>
+                  <span class="robot-antenna-ball"></span>
+                </div>
+                <div class="robot-head">
+                  <div class="robot-head-dome"></div>
+                  <div class="robot-head-brow-plate"></div>
+                  <div class="robot-head-cheek robot-head-cheek--left"></div>
+                  <div class="robot-head-cheek robot-head-cheek--right"></div>
+                  <div class="robot-head-shade"></div>
+                  <div class="robot-glasses">
+                    <div class="robot-glasses-lens">
+                      <div class="robot-eye-socket" #leftSocket>
+                        <span class="robot-eye-green"></span>
+                        <span class="robot-pupil" [style.transform]="leftPupilStyle"></span>
+                      </div>
+                    </div>
+                    <div class="robot-glasses-bridge"></div>
+                    <div class="robot-glasses-lens">
+                      <div class="robot-eye-socket" #rightSocket>
+                        <span class="robot-eye-green"></span>
+                        <span class="robot-pupil" [style.transform]="rightPupilStyle"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="robot-glasses-temple robot-glasses-temple--left"></div>
+                  <div class="robot-glasses-temple robot-glasses-temple--right"></div>
+                  <div class="robot-jaw-plate"></div>
+                  <div class="robot-mouth-grille"></div>
+                  <div class="robot-chin-vent"></div>
+                </div>
+              </div>
+              <div class="robot-speech-bubble" *ngIf="robotBubbleVisible && !robotExploding" role="status"
+                aria-live="polite">
+                <p class="robot-speech-text">{{ robotBubbleMessages[robotBubbleMessageIndex] }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="career-roadmap" role="list">
+            <svg class="road-curve-svg" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="road3dAsphalt" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#1e1e22" />
+                  <stop offset="50%" stop-color="#2d2d34" />
+                  <stop offset="100%" stop-color="#18181c" />
+                </linearGradient>
+              </defs>
+              <path class="road-curve-base"
+                d="M 50 0 C 50 90 22 130 22 250 C 22 370 78 410 78 500 C 78 590 22 630 22 750 C 22 870 78 910 78 1000" />
+              <path class="road-curve-lane" stroke-dasharray="5 16"
+                d="M 50 0 C 50 90 22 130 22 250 C 22 370 78 410 78 500 C 78 590 22 630 22 750 C 22 870 78 910 78 1000" />
+            </svg>
+            <div class="roadmap-item" *ngFor="let exp of journeyExperiences; let i = index"
+              [class.item-right]="i % 2 === 1" role="listitem">
+              <div class="road-node" aria-hidden="true"></div>
+              <button type="button" class="career-card" (click)="openExperienceModal(exp)">
+                <div class="career-card-top">
+                  <span class="career-card-avatar">{{ exp.company[0] }}</span>
+                  <div class="career-card-headings">
+                    <h3 class="career-card-role">{{ exp.role }}</h3>
+                    <div class="career-card-company">{{ exp.company }}</div>
+                  </div>
+                </div>
+                <div class="career-card-meta">{{ exp.period }} · {{ exp.location }}</div>
+                <ul class="career-card-bullets">
+                  <li *ngFor="let item of exp.description">{{ item }}</li>
+                </ul>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience Modal -->
+        <div class="experience-modal-overlay" *ngIf="experienceModalOpen" (click)="closeExperienceModal()">
+          <div class="experience-modal-content" (click)="$event.stopPropagation()">
+            <button class="close-btn" (click)="closeExperienceModal()">×</button>
+
+            <div class="modal-header" [class.india]="selectedJourneyExperience?.flag === 'in'"
+              [class.usa]="selectedJourneyExperience?.flag === 'us'">
+              <h3>{{selectedJourneyExperience?.role}}</h3>
+              <div class="company-name">{{selectedJourneyExperience?.company}}</div>
+              <div class="period-location">
+                <span>{{selectedJourneyExperience?.period}}</span>
+                <span>•</span>
+                <span>{{selectedJourneyExperience?.location}}</span>
+              </div>
+            </div>
+
+            <div class="modal-body">
+              <ul class="achievements-list">
+                <li *ngFor="let item of selectedJourneyExperience?.description">{{item}}</li>
+              </ul>
+
+              <div class="tech-stack-container">
+                <h4>Technologies</h4>
+                <div class="tech-tags">
+                  <span class="tech-tag" *ngFor="let tech of selectedJourneyExperience?.technologies">
+                    {{tech}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Skills Tab Content -->
+    <div *ngIf="activeTab === 'skills'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Skills & Technologies</h2>
+
+        <div class="skills-container">
+          <!-- Loop through rows of skills -->
+          <div class="skill-row" *ngFor="let row of skillRows; let i = index" [class.reverse]="i % 2 !== 0">
+            <div class="skill-track">
+              <!-- Repeat items to create seamless infinite scroll -->
+              <div class="skill-card" *ngFor="let skill of row" (click)="openSkillModal(skill)"
+                [style.--skill-color]="skill.color">
+                <div class="skill-icon">
+                  <i [class]="skill.icon"></i>
+                </div>
+                <div class="skill-name">{{skill.name}}</div>
+              </div>
+              <!-- Duplicate for seamless loop -->
+              <div class="skill-card" *ngFor="let skill of row" (click)="openSkillModal(skill)"
+                [style.--skill-color]="skill.color">
+                <div class="skill-icon">
+                  <i [class]="skill.icon"></i>
+                </div>
+                <div class="skill-name">{{skill.name}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skill Details Modal -->
+      <div *ngIf="selectedSkill" class="skill-modal-overlay" (click)="closeSkillModal()">
+        <div class="skill-modal-content" (click)="$event.stopPropagation()">
+          <button class="close-btn" (click)="closeSkillModal()">×</button>
+
+          <div class="skill-header" [style.background]="selectedSkill.color">
+            <div class="skill-icon-large">
+              <i [class]="selectedSkill.icon"></i>
+            </div>
+            <h2>{{selectedSkill.name}}</h2>
+            <span class="skill-category">{{selectedSkill.category}}</span>
+          </div>
+
+          <div class="skill-body">
+            <div class="skill-section">
+              <h3>Description</h3>
+              <p>{{selectedSkill.description}}</p>
+            </div>
+
+            <div class="skill-section">
+              <h3>How I Use It</h3>
+              <p>{{selectedSkill.usage}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Tab Content -->
+    <div *ngIf="activeTab === 'education'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Education & Certifications</h2>
+        <div class="cards-grid">
+          <div class="netflix-card" (click)="showCollegeDetails('umich')">
+            <div class="card-content">
+              <h3>University of Michigan-Flint</h3>
+            </div>
+          </div>
+          <div class="netflix-card" (click)="showCollegeDetails('vignan')">
+            <div class="card-content">
+              <h3>Vignan Institute of Technology & Sciences</h3>
+            </div>
+          </div>
+          <div class="netflix-card" (click)="setActiveTab('certificates', 'Certifications')">
+            <div class="card-content">
+              <h3>Certifications</h3>
+            </div>
+          </div>
+          <div class="netflix-card" (click)="setActiveTab('academic-projects', 'Academic Projects')">
+            <div class="card-content">
+              <h3>Academic Projects</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- College Details Modal -->
+      <div *ngIf="selectedCollege" class="college-modal" (click)="closeCollegeDetails()">
+        <div class="college-modal-content" (click)="$event.stopPropagation()">
+          <div class="college-hero" [class.umich-bg]="selectedCollege === 'umich'"
+            [class.vignan-bg]="selectedCollege === 'vignan'">
+            <div class="college-info">
+              <h2 *ngIf="selectedCollege === 'umich'">University of Michigan-Flint</h2>
+              <h2 *ngIf="selectedCollege === 'vignan'">Vignan Institute of Technology & Sciences</h2>
+              <p *ngIf="selectedCollege === 'umich'">Flint, Michigan, USA</p>
+              <p *ngIf="selectedCollege === 'vignan'">Deshmukhi, Hyderabad, Telangana, India</p>
+            </div>
+          </div>
+          <div class="college-details">
+            <div *ngIf="selectedCollege === 'umich'" class="college-text">
+              <h3>My Experience at University of Michigan-Flint</h3>
+              <p>Currently pursuing my graduate studies at University of Michigan-Flint, where I serve as a Graduate
+                Student Ambassador. This prestigious institution has provided me with advanced knowledge in AI, machine
+                learning, and full-stack development.</p>
+              <p>As a Graduate Student Ambassador, I mentor over 1000+ students on AI, programming, and web development.
+                I've built academic dashboards using .NET 8 and MySQL, and led workshops on full-stack development and
+                AI integration.</p>
+              <p>The university's cutting-edge curriculum and research opportunities have enhanced my expertise in
+                emerging technologies and prepared me for leadership roles in the tech industry.</p>
+              <div class="college-actions college-actions--row">
+                <button type="button" class="btn btn-primary" (click)="visitUniversity('umich')">
+                  Visit the page for more information
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="viewUmichCertificate()">
+                  View my certificate
+                </button>
+              </div>
+            </div>
+            <div *ngIf="selectedCollege === 'vignan'" class="college-text">
+              <h3>My Experience at Vignan Institute of Technology & Sciences</h3>
+              <p>Vignan Institute of Technology & Sciences in Deshmukhi, Hyderabad, provided me with a strong foundation
+                in computer science and engineering. This esteemed institution in Telangana, India, shaped my early
+                technical skills and passion for technology.</p>
+              <p>During my time at Vignan, I developed fundamental programming skills, learned software engineering
+                principles, and gained hands-on experience with various technologies. The institute's rigorous
+                curriculum and practical approach to education laid the groundwork for my successful career in software
+                development.</p>
+              <p>The collaborative learning environment and experienced faculty at Vignan helped me understand the
+                importance of continuous learning and innovation in the rapidly evolving field of technology.</p>
+              <div class="college-actions">
+                <button class="btn btn-primary" (click)="visitUniversity('vignan')">
+                  Visit the page for more information
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Tab Content -->
+    <div *ngIf="activeTab === 'projects'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Project Portfolio</h2>
+        <div class="cards-grid">
+          <div class="netflix-card" (click)="setActiveTab('web-applications')">
+            <div class="card-content">
+              <h3>Web Applications</h3>
+            </div>
+          </div>
+          <div class="netflix-card">
+            <div class="card-content">
+              <h3>AI Projects</h3>
+            </div>
+          </div>
+          <div class="netflix-card">
+            <div class="card-content">
+              <h3>Mobile Apps</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Certificates Tab Content -->
+    <div *ngIf="activeTab === 'certificates'" class="tab-content">
+      <section class="row">
+        <div class="page-header">
+          <h2 class="row-title">Professional Certifications</h2>
+          <button class="back-arrow" (click)="goBackToEducation()" title="Back to Education">
+            ←
+          </button>
+        </div>
+        <div class="certificates-carousel-container">
+          <button class="carousel-arrow left-arrow" (click)="previousCertificate()"
+            [disabled]="currentCertificateIndex === 0">
+            ‹
+          </button>
+          <div class="certificates-carousel">
+            <div class="certificates-track" [style.transform]="getCertificateTransform()">
+              <!-- Previous Certificate -->
+              <div class="certificate-card prev" *ngIf="currentCertificateIndex > 0" [class]="'certificate-card prev'">
+                <div class="certificate-image">
+                  <img [src]="certificates[currentCertificateIndex - 1].image"
+                    [alt]="certificates[currentCertificateIndex - 1].title" />
+                </div>
+                <div class="certificate-info">
+                  <h3>{{certificates[currentCertificateIndex - 1].title}}</h3>
+                  <p class="description">{{certificates[currentCertificateIndex - 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of certificates[currentCertificateIndex - 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="certificate-meta">
+                    <span class="issuer">{{certificates[currentCertificateIndex - 1].issuer}}</span>
+                    <span class="date">{{certificates[currentCertificateIndex - 1].date}}</span>
+                    <span class="category">{{certificates[currentCertificateIndex - 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Current Certificate -->
+              <div class="certificate-card active">
+                <div class="certificate-image">
+                  <img [src]="certificates[currentCertificateIndex].image"
+                    [alt]="certificates[currentCertificateIndex].title" />
+                </div>
+                <div class="certificate-info">
+                  <h3>{{certificates[currentCertificateIndex].title}}</h3>
+                  <p class="description">{{certificates[currentCertificateIndex].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of certificates[currentCertificateIndex].technologies">{{tech}}</span>
+                  </div>
+                  <div class="certificate-meta">
+                    <span class="issuer">{{certificates[currentCertificateIndex].issuer}}</span>
+                    <span class="date">{{certificates[currentCertificateIndex].date}}</span>
+                    <span class="category">{{certificates[currentCertificateIndex].category}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Next Certificate -->
+              <div class="certificate-card next" *ngIf="currentCertificateIndex < certificates.length - 1"
+                [class]="'certificate-card next'">
+                <div class="certificate-image">
+                  <img [src]="certificates[currentCertificateIndex + 1].image"
+                    [alt]="certificates[currentCertificateIndex + 1].title" />
+                </div>
+                <div class="certificate-info">
+                  <h3>{{certificates[currentCertificateIndex + 1].title}}</h3>
+                  <p class="description">{{certificates[currentCertificateIndex + 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of certificates[currentCertificateIndex + 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="certificate-meta">
+                    <span class="issuer">{{certificates[currentCertificateIndex + 1].issuer}}</span>
+                    <span class="date">{{certificates[currentCertificateIndex + 1].date}}</span>
+                    <span class="category">{{certificates[currentCertificateIndex + 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-arrow right-arrow" (click)="nextCertificate()"
+            [disabled]="currentCertificateIndex === certificates.length - 1">
+            ›
+          </button>
+        </div>
+        <div class="certificate-indicators">
+          <span *ngFor="let certificate of certificates; let i = index" class="indicator"
+            [class.active]="i === currentCertificateIndex" (click)="goToCertificate(i)">
+          </span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Academic Projects Tab Content -->
+    <div *ngIf="activeTab === 'academic-projects'" class="tab-content">
+      <section class="row">
+        <div class="page-header">
+          <h2 class="row-title">Academic Projects Portfolio</h2>
+          <button class="back-arrow" (click)="goBackToEducation()" title="Back to Education">
+            ←
+          </button>
+        </div>
+        <div class="projects-carousel-container">
+          <button class="carousel-arrow left-arrow" (click)="previousProject()" [disabled]="currentProjectIndex === 0">
+            ‹
+          </button>
+          <div class="projects-carousel">
+            <div class="projects-track" [style.transform]="getProjectTransform()">
+              <!-- Previous Project -->
+              <div class="project-card prev" *ngIf="currentProjectIndex > 0" [class]="'project-card prev'">
+                <div class="project-image">
+                  <img [src]="academicProjects[currentProjectIndex - 1].image"
+                    [alt]="academicProjects[currentProjectIndex - 1].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{academicProjects[currentProjectIndex - 1].title}}</h3>
+                  <p class="description">{{academicProjects[currentProjectIndex - 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of academicProjects[currentProjectIndex - 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{academicProjects[currentProjectIndex - 1].year}}</span>
+                    <span class="category">{{academicProjects[currentProjectIndex - 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Current Project -->
+              <div class="project-card active">
+                <div class="project-image">
+                  <img [src]="academicProjects[currentProjectIndex].image"
+                    [alt]="academicProjects[currentProjectIndex].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{academicProjects[currentProjectIndex].title}}</h3>
+                  <p class="description">{{academicProjects[currentProjectIndex].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of academicProjects[currentProjectIndex].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{academicProjects[currentProjectIndex].year}}</span>
+                    <span class="category">{{academicProjects[currentProjectIndex].category}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Next Project -->
+              <div class="project-card next" *ngIf="currentProjectIndex < academicProjects.length - 1"
+                [class]="'project-card next'">
+                <div class="project-image">
+                  <img [src]="academicProjects[currentProjectIndex + 1].image"
+                    [alt]="academicProjects[currentProjectIndex + 1].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{academicProjects[currentProjectIndex + 1].title}}</h3>
+                  <p class="description">{{academicProjects[currentProjectIndex + 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of academicProjects[currentProjectIndex + 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{academicProjects[currentProjectIndex + 1].year}}</span>
+                    <span class="category">{{academicProjects[currentProjectIndex + 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-arrow right-arrow" (click)="nextProject()"
+            [disabled]="currentProjectIndex === academicProjects.length - 1">
+            ›
+          </button>
+        </div>
+        <div class="project-indicators">
+          <span *ngFor="let project of academicProjects; let i = index" class="indicator"
+            [class.active]="i === currentProjectIndex" (click)="goToProject(i)">
+          </span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Web Projects Tab Content -->
+    <div *ngIf="activeTab === 'web-applications'" class="tab-content">
+      <section class="row">
+        <div class="page-header">
+          <h2 class="row-title">Web Applications</h2>
+          <button class="back-arrow" (click)="goBackToProjects()" title="Back to Projects">
+            ←
+          </button>
+        </div>
+        <div class="projects-carousel-container">
+          <button class="carousel-arrow left-arrow" (click)="previousWebProject()"
+            [disabled]="currentWebProjectIndex === 0">
+            ‹
+          </button>
+          <div class="projects-carousel">
+            <div class="projects-track" [style.transform]="getWebProjectTransform()">
+              <!-- Previous Project -->
+              <div class="project-card prev" *ngIf="currentWebProjectIndex > 0" [class]="'project-card prev'">
+                <div class="project-image">
+                  <img [src]="webProjects[currentWebProjectIndex - 1].image"
+                    [alt]="webProjects[currentWebProjectIndex - 1].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{webProjects[currentWebProjectIndex - 1].title}}</h3>
+                  <p class="description">{{webProjects[currentWebProjectIndex - 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of webProjects[currentWebProjectIndex - 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{webProjects[currentWebProjectIndex - 1].year}}</span>
+                    <span class="category">{{webProjects[currentWebProjectIndex - 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Current Project -->
+              <div class="project-card active" *ngIf="webProjects.length > 0">
+                <div class="project-image">
+                  <img [src]="webProjects[currentWebProjectIndex].image"
+                    [alt]="webProjects[currentWebProjectIndex].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{webProjects[currentWebProjectIndex].title}}</h3>
+                  <p class="description">{{webProjects[currentWebProjectIndex].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of webProjects[currentWebProjectIndex].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{webProjects[currentWebProjectIndex].year}}</span>
+                    <span class="category">{{webProjects[currentWebProjectIndex].category}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Next Project -->
+              <div class="project-card next" *ngIf="currentWebProjectIndex < webProjects.length - 1"
+                [class]="'project-card next'">
+                <div class="project-image">
+                  <img [src]="webProjects[currentWebProjectIndex + 1].image"
+                    [alt]="webProjects[currentWebProjectIndex + 1].title" />
+                </div>
+                <div class="project-info">
+                  <h3>{{webProjects[currentWebProjectIndex + 1].title}}</h3>
+                  <p class="description">{{webProjects[currentWebProjectIndex + 1].description}}</p>
+                  <div class="technologies">
+                    <span class="tech-tag"
+                      *ngFor="let tech of webProjects[currentWebProjectIndex + 1].technologies">{{tech}}</span>
+                  </div>
+                  <div class="project-meta">
+                    <span class="year">{{webProjects[currentWebProjectIndex + 1].year}}</span>
+                    <span class="category">{{webProjects[currentWebProjectIndex + 1].category}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-arrow right-arrow" (click)="nextWebProject()"
+            [disabled]="currentWebProjectIndex === webProjects.length - 1">
+            ›
+          </button>
+        </div>
+        <div class="project-indicators">
+          <span *ngFor="let project of webProjects; let i = index" class="indicator"
+            [class.active]="i === currentWebProjectIndex" (click)="goToWebProject(i)">
+          </span>
+        </div>
+      </section>
+    </div>
+
+
+    <!-- Hire Me Tab Content -->
+    <div *ngIf="activeTab === 'hire'" class="tab-content">
+      <section class="row">
+        <h2 class="row-title">Get In Touch</h2>
+        <div class="cards-grid">
+          <div class="netflix-card" (click)="showContactDetails()">
+            <div class="card-content">
+              <h3>Contact Info</h3>
+            </div>
+          </div>
+          <div class="netflix-card" (click)="openResumeModal()">
+            <div class="card-content">
+              <h3>Resume</h3>
+            </div>
+          </div>
+          <div class="netflix-card" (click)="openLinkedIn()">
+            <div class="card-content">
+              <h3>LinkedIn</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Details Modal -->
+      <div *ngIf="showContactModal" class="contact-modal" (click)="closeContactModal()">
+        <div class="contact-modal-content" (click)="$event.stopPropagation()">
+          <div class="contact-header">
+            <h2>Contact Information</h2>
+            <button class="close-btn" (click)="closeContactModal()">×</button>
+          </div>
+
+          <div class="contact-layout">
+            <!-- Left Side - Contact Details -->
+            <div class="contact-details-section">
+              <h3>Get In Touch</h3>
+              <div class="contact-details">
+                <div class="contact-item">
+                  <i class="icon email-icon">✉</i>
+                  <div>
+                    <h4>Email</h4>
+                    <p>bharathkumarbandi500&#64;gmail.com</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="icon phone-icon">📞</i>
+                  <div>
+                    <h4>Phone</h4>
+                    <p>+1 810-293-1752</p>
+                  </div>
+                </div>
+                <div class="contact-item">
+                  <i class="icon pin-icon">📍</i>
+                  <div>
+                    <h4>Address</h4>
+                    <p>37041 Jefferson Ct, Unit-613, Farmington Hills, Michigan, United States, 48335</p>
+                  </div>
+                </div>
+                <div class="contact-item linkedin-item" (click)="openLinkedIn()">
+                  <i class="icon linkedin-icon">in</i>
+                  <div>
+                    <h4>LinkedIn</h4>
+                    <p>linkedin.com/in/bharathkumar-bandi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side - Message Form -->
+            <div class="message-form-section">
+              <h3>Send me a message</h3>
+              <form (ngSubmit)="sendMessage()" #messageForm="ngForm">
+                <div class="form-group">
+                  <label for="name">Your Name *</label>
+                  <input type="text" id="name" name="name" [(ngModel)]="messageData.name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Your Email *</label>
+                  <input type="email" id="email" name="email" [(ngModel)]="messageData.email" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Your Phone (Optional)</label>
+                  <input type="tel" id="phone" name="phone" [(ngModel)]="messageData.phone">
+                </div>
+                <div class="form-group">
+                  <label for="message">Message *</label>
+                  <textarea id="message" name="message" [(ngModel)]="messageData.message" rows="4" required></textarea>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="sendMessage()" [disabled]="!messageForm.valid">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Message Success Modal -->
+      <div *ngIf="showMessageSuccessModal" class="confirmation-modal" (click)="closeMessageSuccess()">
+        <div class="message-success-modal-content" (click)="$event.stopPropagation()">
+          <div class="message-success-header">
+            <h2>Thank You, {{lastSubmittedName}} &#33;</h2>
+          </div>
+          <div class="message-success-body">
+            <div class="message-content">
+              <p>Thank you for your interest,</p>
+              <p>For immediate contact, please reach out to me directly:</p>
+            </div>
+            <div class="contact-info">
+              <div class="contact-item">
+                <span class="contact-icon">📱</span>
+                <span class="contact-text">+1 810-293-1752</span>
+
+                <span class="contact-icon">📧</span>
+                <span class="contact-text">bharathkumarbandi500&#64;gmail.com</span>
+              </div>
+            </div>
+            <div class="message-footer">
+              <p>I'll get back to you as soon as possible!</p>
+              <p><strong>Bharath Kumar Bandi</strong></p>
+            </div>
+            <div class="confirmation-actions">
+              <button class="btn btn-primary" (click)="closeMessageSuccess()">GOT IT!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

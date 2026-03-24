@@ -1,0 +1,56 @@
+<div class="code-viewer">
+  <!-- Header -->
+  <header class="code-header">
+    <div class="header-content">
+      <h1 class="code-title">Bharath Kumar Bandi - Source Code</h1>
+      <div class="header-actions">
+        <button class="btn btn-secondary" (click)="goBack()">← Back</button>
+        <button class="btn btn-primary" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="code-content-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="file-list">
+        <h3 class="file-list-title">Source Files</h3>
+        <div class="file-items">
+          <div 
+            *ngFor="let file of sourceFiles" 
+            class="file-item"
+            [class.active]="selectedFile?.name === file.name"
+            (click)="selectFile(file)"
+          >
+            <span class="file-icon">{{ getFileIcon(file.type) }}</span>
+            <span class="file-name">{{ file.name }}</span>
+          </div>
+        </div>
+      </div>
+      
+    </aside>
+
+    <!-- Main Content -->
+    <main class="code-content">
+      <div *ngIf="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading source files...</p>
+      </div>
+
+      <div *ngIf="!loading && selectedFile" class="code-display">
+        <div class="code-header">
+          <h2 class="file-title">{{ selectedFile.name }}</h2>
+          <span class="file-path">{{ selectedFile.path }}</span>
+        </div>
+        <div class="code-body">
+          <pre><code [class]="getLanguageClass(selectedFile.type)">{{ selectedFile.content }}</code></pre>
+        </div>
+      </div>
+
+      <div *ngIf="!loading && !selectedFile" class="no-file">
+        <h2>No file selected</h2>
+        <p>Select a file from the sidebar to view its contents.</p>
+      </div>
+    </main>
+  </div>
+</div>
